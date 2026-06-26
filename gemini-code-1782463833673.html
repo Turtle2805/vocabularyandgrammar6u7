@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ms Lê Hằng English - Chuyên Đề School & Prepositions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Quicksand:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #8854C0;
+            --secondary-bg: #FDCB6E;
+            --accent-bg: #00C9A7;
+            --correct: #00D26A;
+            --wrong: #FF4757;
+            --text-color: #2d3436;
+        }
+
+        * { box-sizing: border-box; font-family: 'Nunito', 'Quicksand', sans-serif; }
+
+        body {
+            margin: 0;
+            padding: 15px;
+            background: linear-gradient(-45deg, #8854C0, #FDCB6E, #00C9A7, #ff7675);
+            background-size: 400% 400%;
+            animation: loangMauNen 14s ease infinite;
+            min-height: 100vh;
+            color: var(--text-color);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes loangMauNen {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Họa tiết trường học lơ lửng trên nền ứng dụng */
+        .bg-school-patterns {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 100 100"><text y="30" x="10" font-size="22">📐</text><text y="85" x="70" font-size="24">🏫</text><text y="40" x="75" font-size="22">📚</text><text y="90" x="15" font-size="24">✏️</text></svg>');
+            background-size: 150px 150px;
+            opacity: 0.3;
+            z-index: 0;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            animation: bayBongHọaTiet 25s linear infinite;
+        }
+
+        @keyframes bayBongHọaTiet {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 150px 300px; }
+        }
+
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.97);
+            padding: 25px;
+            border-radius: 30px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 3px dashed #dfe6e9;
+            padding-bottom: 15px;
+        }
+
+        .badge-teacher {
+            font-size: 1em;
+            color: #6c5ce7;
+            font-weight: 800;
+            background: #f1f2f6;
+            padding: 6px 18px;
+            border-radius: 14px;
+            display: inline-block;
+            border: 2px dashed #a29bfe;
+        }
+
+        .alert-box {
+            background: #fff3cd;
+            border: 3px dashed #f59f00;
+            padding: 18px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            font-size: 1em;
+            color: #856404;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(245, 159, 0, 0.08);
+        }
+
+        .exercise-header {
+            background: #e8f5e9;
+            color: #1b5e20;
+            padding: 12px 18px;
+            border-radius: 14px;
+            font-weight: 800;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-left: 6px solid #2e7d32;
+            font-size: 1.15em;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+            border: 3px solid #f1f2f6;
+            transition: all 0.3s ease;
+        }
+        .card:hover { border-color: #a29bfe; transform: translateY(-2px); }
+
+        .question-text {
+            font-size: 1.15em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #2d3436;
+            line-height: 1.5;
+        }
+
+        .options-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        @media(min-width: 600px) {
+            .options-layout { grid-template-columns: 1fr 1fr; }
+        }
+
+        .btn-opt {
+            padding: 15px 18px;
+            border: none;
+            border-radius: 18px;
+            font-size: 1.02em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 0 #b2bec3;
+            background: #f1f2f6;
+            text-align: left;
+            color: #2d3436;
+            line-height: 1.4;
+        }
+        .btn-opt:hover {
+            transform: scale(1.015);
+            background: #ffeaa7;
+            box-shadow: 0 5px 0 #fdcb6e;
+        }
+        .btn-opt:active { transform: translateY(5px); box-shadow: none !important; }
+
+        .btn-opt.correct {
+            background: var(--correct) !important;
+            color: white !important;
+            box-shadow: 0 5px 0 #00b894 !important;
+        }
+        .btn-opt.wrong {
+            background: var(--wrong) !important;
+            color: white !important;
+            box-shadow: 0 5px 0 #d63031 !important;
+            animation: rungGiat 0.4s ease;
+        }
+
+        @keyframes rungGiat {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        .explanation-panel {
+            display: none;
+            margin-top: 15px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-left: 6px solid #00b894;
+            border-radius: 14px;
+            font-size: 0.98em;
+            line-height: 1.7;
+            color: #2d3436;
+            animation: haCanh 0.4s ease;
+        }
+
+        @keyframes haCanh { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .sticky-submit-bar {
+            position: sticky;
+            bottom: 15px;
+            background: rgba(255,255,255,0.96);
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.06);
+            z-index: 10;
+            margin-top: 40px;
+        }
+
+        .btn-submit-all {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.3em;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #4834d4;
+            transition: all 0.2s;
+        }
+        .btn-submit-all:hover { filter: brightness(1.08); transform: translateY(-2px); }
+        .btn-submit-all:active { transform: translateY(6px); box-shadow: none; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-box {
+            background: white;
+            padding: 35px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            animation: modalHienRa 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes modalHienRa { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .modal-box h2 { font-size: 2.2em; color: #6c5ce7; margin-top: 0; }
+        .modal-box p { font-size: 1.15em; font-weight: 700; color: #353b48; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+<div class="bg-school-patterns"></div>
+
+<div class="container">
+    <header>
+        <div class="badge-teacher">Giáo viên tạo: Ms Lê Hằng English</div>
+    </header>
+
+    <div class="alert-box">
+        ⚠️ LỜI NHẮC CỰC KỲ QUAN TRỌNG ⚠️<br><br>
+        Chỉ có đọc kỹ giải thích ngay sau mỗi câu, sau đó ghi lại từ vựng/cấu trúc mới vào vở để học thì mới thực sự giỏi lên.<br>
+        Làm cho xong mà không đọc giải thích hay đọc qua loa không ghi chép thì chỉ tốn thời gian vô ích!<br>
+        <strong>* Kéo tới đâu, làm tới đó! *</strong>
+    </div>
+
+    <div id="quiz-load-zone"></div>
+
+    <div class="sticky-submit-bar">
+        <button class="btn-submit-all" onclick="nopBaiVaChamDiem()">Nộp Bài Xem Tổng Kết Điểm 🌟</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="result-overlay">
+    <div class="modal-box">
+        <h2>Kết Quả Bài Làm Của Con</h2>
+        <p id="txt-diem" style="font-size: 1.6em; color: #6c5ce7; font-weight: 800;"></p>
+        <p id="txt-nhan-xet"></p>
+        <button class="btn-submit-all" onclick="location.reload()" style="font-size: 1.1em; padding: 12px; margin-top: 15px;">LÀM LẠI BÀI TẬP</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+    const questionsRawData = [
+        // Exercise 3
+        {ex: "Exercise 3: Multiple Choice", q: "1. He was a uniquely gifted _________.", opts: ["student", "classmates", "teachers", "members"], ans: "student", tag: "Cậu ấy là một học sinh có tài năng độc nhất vô nhị.", hint: "Mạo từ 'a' yêu cầu một danh từ đếm được số ít đứng sau. Các phương án còn lại đều ở dạng số nhiều."},
+        {ex: "Exercise 3: Multiple Choice", q: "2. Mai is my classmate. We are in _________ 7A.", opts: ["Science", "Subject", "Grade", "Project"], ans: "Grade", tag: "Mai là bạn cùng lớp của tôi. Chúng tôi học khối/lớp 7A.", hint: "Từ 'Grade' dùng để chỉ khối lớp học trong hệ thống giáo dục."},
+        {ex: "Exercise 3: Multiple Choice", q: "3. Mary is Lan’s _________. They are in the same class.", opts: ["teacher", "daughter", "student", "classmate"], ans: "classmate", tag: "Mary là bạn cùng lớp của Lan. Họ học chung một lớp.", hint: "Cụm từ 'in the same class' (học chung lớp) giải nghĩa trực tiếp cho danh từ 'classmate' (bạn cùng lớp)."},
+        {ex: "Exercise 3: Multiple Choice", q: "4. Mai and Nam are _________ students in our school. They are very good in maths.", opts: ["well-known", "gifted", "hard-working", "intelligent"], ans: "gifted", tag: "Mai và Nam là những học sinh năng khiếu ở trường chúng tôi. Họ học toán rất giỏi.", hint: "Tính từ 'gifted' nghĩa là có năng khiếu bẩm sinh, rất phù hợp với ngữ cảnh giỏi môn Toán đặc thù."},
+        {ex: "Exercise 3: Multiple Choice", q: "5. Everyone should bring the necessary equipment for camping in the _________.", opts: ["staffroom", "neighbourhood", "playground", "mountains"], ans: "mountains", tag: "Mọi người nên mang theo thiết bị cần thiết để cắm trại ở vùng núi.", hint: "Địa điểm phù hợp nhất cho hoạt động cắm trại dã ngoại dài ngày dã ngoại là 'mountains' (núi rừng)."},
+        {ex: "Exercise 3: Multiple Choice", q: "6. Mary is Lan's _________. They are in the same class.", opts: ["teacher", "member", "classmate", "student"], ans: "classmate", tag: "Mary là bạn cùng lớp của Lan. Họ ở cùng một lớp học.", hint: "Học cùng một lớp thì gọi là bạn cùng lớp 'classmate'."},
+        {ex: "Exercise 3: Multiple Choice", q: "7. You have to take an entrance _________ to study at this school.", opts: ["subject", "course", "term", "examination"], ans: "examination", tag: "Bạn phải tham gia một kỳ thi tuyển sinh để được vào học tại ngôi trường này.", hint: "Cụm danh từ cố định: 'entrance examination' nghĩa là kỳ thi tuyển sinh đầu vào."},
+        {ex: "Exercise 3: Multiple Choice", q: "8. The _________ exam of this school is very difficult.", opts: ["midterm", "entrance", "final", "test"], ans: "entrance", tag: "Kỳ thi tuyển sinh của trường này rất khó khăn.", hint: "Cụm từ 'entrance exam' chỉ kỳ thi đầu vào để tuyển chọn học sinh."},
+        {ex: "Exercise 3: Multiple Choice", q: "9. We are in the _________. We are doing scientific tests.", opts: ["laboratory", "garden", "classroom", "gym"], ans: "laboratory", tag: "Chúng tôi đang ở trong phòng thí nghiệm. Chúng tôi đang thực hiện các bài kiểm tra khoa học.", hint: "Nơi thực hiện các thí nghiệm, kiểm tra khoa học ('scientific tests') là 'laboratory' (phòng thí nghiệm)."},
+        {ex: "Exercise 3: Multiple Choice", q: "10. All classrooms have private _________.", opts: ["projects", "facilities", "ideas", "members"], ans: "facilities", tag: "Tất cả các phòng học đều có cơ sở vật chất trang thiết bị riêng tư.", hint: "Danh từ 'facilities' chỉ cơ sở vật chất, trang thiết bị phục vụ việc học tập trong lớp."},
+        {ex: "Exercise 3: Multiple Choice", q: "11. The questions of the midterm _________ were so difficult for me.", opts: ["PE", "lab", "gym", "test"], ans: "test", tag: "Các câu hỏi của bài kiểm tra giữa kỳ quá khó đối với tôi.", hint: "Cụm từ phối hợp thông dụng: 'midterm test/exam' nghĩa là bài kiểm tra giữa học kỳ."},
+        {ex: "Exercise 3: Multiple Choice", q: "12. We didn't have extra _________ last week.", opts: ["classes", "teachers", "students", "members"], ans: "classes", tag: "Chúng tôi đã không có các lớp học thêm vào tuần trước.", hint: "Cụm từ phổ biến trong học đường: 'extra classes' nghĩa là các lớp học thêm/giờ học bổ trợ."},
+        {ex: "Exercise 3: Multiple Choice", q: "13. Students can borrow books from the _________.", opts: ["laboratory", "facility", "library", "history"], ans: "library", tag: "Học sinh có thể mượn sách từ thư viện trường.", hint: "Nơi chứa sách và cho học sinh mượn sách ('borrow books') là 'library' (thư viện)."},
+        {ex: "Exercise 3: Multiple Choice", q: "14. She is working with instruments. She is in the _________.", opts: ["canteen", "staffroom", "library", "laboratory"], ans: "laboratory", tag: "Cô ấy đang làm việc với các dụng cụ thí nghiệm. Cô ấy ở trong phòng thí nghiệm.", hint: "Làm việc với dụng cụ khoa học chuyên dụng chỉ có thể là phòng thí nghiệm 'laboratory'."},
+        {ex: "Exercise 3: Multiple Choice", q: "15. Football and cricket are _________ games.", opts: ["gifted", "outdoor", "intelligent", "hard-working"], ans: "outdoor", tag: "Bóng đá và dế mèn (cricket) là các trò chơi thể thao ngoài trời.", hint: "Tính từ 'outdoor' nghĩa là ngoài trời, dùng để phân loại tính chất các môn thể thao sân rộng."},
+        {ex: "Exercise 3: Multiple Choice", q: "16. The _________ of my new school are modern.", opts: ["library", "computers", "classroom", "facility"], ans: "computers", tag: "Hệ thống máy tính của trường học mới của tôi rất hiện đại.", hint: "Động từ chia số nhiều là 'are' nên chủ ngữ bắt buộc phải là danh từ số nhiều 'computers'."},
+        {ex: "Exercise 3: Multiple Choice", q: "17. The teacher reminded her students to do _________ homework.", opts: ["them", "their", "theirs", "they"], ans: "their", tag: "Giáo viên nhắc nhở học sinh của mình làm bài tập về nhà của họ.", hint: "Cần một tính từ sở hữu 'their' đứng trước danh từ 'homework' để bổ nghĩa sở hữu cho 'students'."},
+        {ex: "Exercise 3: Multiple Choice", q: "18. There is a new _________ in my office.", opts: ["computer", "science lab", "projector", "facility"], ans: "projector", tag: "Có một chiếc máy chiếu mới ở trong văn phòng của tôi.", hint: "Dựa vào đáp án chính thống của phiếu bài tập gốc, 'projector' hoặc 'computer' đều đúng ngữ pháp, chọn 'projector' làm đáp án quy chuẩn văn phòng."},
+        {ex: "Exercise 3: Multiple Choice", q: "19. She is known by many people. She is _________.", opts: ["good", "well-known", "beautiful", "clever"], ans: "well-known", tag: "Cô ấy được biết đến bởi rất nhiều người. Cô ấy nổi tiếng.", hint: "Định nghĩa cụm từ 'known by many people' chính là nghĩa của tính từ ghép 'well-known' (nổi tiếng)."},
+        {ex: "Exercise 3: Multiple Choice", q: "20. They are doing _________ in the laboratory.", opts: ["experiments", "ideas", "tests", "projects"], ans: "experiments", tag: "Họ đang làm các thí nghiệm hóa lý trong phòng thí nghiệm.", hint: "Cụm động từ đi liền dùng cho phòng thí nghiệm khoa học: 'do experiments' (làm thí nghiệm)."},
+        {ex: "Exercise 3: Multiple Choice", q: "21. My favourite subject is _________. It’s about life and structure of plants and animals.", opts: ["history", "biology", "maths", "physics"], ans: "biology", tag: "Môn học yêu thích của tôi là sinh học. Nó nghiên cứu về sự sống và cấu trúc của thực vật và động vật.", hint: "Môn học nghiên cứu về sự sống và động thực vật là 'biology' (Sinh học)."},
+        {ex: "Exercise 3: Multiple Choice", q: "22. You have to take an entrance _________ to study at this school.", opts: ["classroom", "lab", "project", "examination"], ans: "examination", tag: "Bạn cần thực hiện một bài thi tuyển sinh đầu vào để học tại trường này.", hint: "Cụm từ chuẩn: 'entrance examination' (kỳ thi tuyển sinh đầu vào)."},
+        {ex: "Exercise 3: Multiple Choice", q: "23. Alison has a Maths _________ test next week.", opts: ["first-term", "final", "midterm", "entrance"], ans: "midterm", tag: "Alison có một bài kiểm tra toán giữa kỳ vào tuần tới.", hint: "Từ hạn định bài thi định kỳ phổ biến trong trường học: 'midterm test' (kiểm tra giữa kỳ)."},
+        {ex: "Exercise 3: Multiple Choice", q: "24. My brother and I go to the same _________.", opts: ["lab", "school", "canteen", "library"], ans: "school", tag: "Anh trai tôi và tôi học cùng một trường.", hint: "Cụm từ thông dụng chỉ việc học chung một cơ sở giáo dục: 'go to the same school'."},
+        {ex: "Exercise 3: Multiple Choice", q: "25. I like _________ because I love working with computers.", opts: ["music", "information technology", "maths", "biology"], ans: "information technology", tag: "Tôi thích công nghệ thông tin vì tôi đam mê làm việc với máy tính.", hint: "Ngành học làm việc sâu với máy tính phần mềm là 'information technology' (Công nghệ thông tin)."},
+        {ex: "Exercise 3: Multiple Choice", q: "26. He is very creative. He always has a new _________.", opts: ["house", "idea", "appearance", "friend"], ans: "idea", tag: "Cậu ấy vô cùng sáng tạo. Cậu ấy luôn luôn có những ý tưởng mới mẻ.", hint: "Người sáng tạo ('creative') là người luôn dồi dào phát kiến, sáng kiến 'idea' (ý tưởng)."},
+        {ex: "Exercise 3: Multiple Choice", q: "27. I like my new school. Its _________ are modern.", opts: ["ideas", "projectors", "projects", "facilities"], ans: "facilities", tag: "Tôi thích ngôi trường mới của mình. Cơ sở vật chất của nó rất hiện đại.", hint: "Động từ 'are' số nhiều đi kèm tính từ chỉ đặc điểm hệ thống trường học phù hợp nhất là 'facilities'."},
+        {ex: "Exercise 3: Multiple Choice", q: "28. My favourite subject is _________. It’s about all the events that happened in the past.", opts: ["math", "biology", "history", "literature"], ans: "history", tag: "Môn học yêu thích của tôi là lịch sử. Nó nói về tất cả các sự kiện xảy ra trong quá khứ.", hint: "Môn học nghiên cứu về các sự kiện quá khứ ('in the past') là 'history' (Lịch sử)."},
+        {ex: "Exercise 3: Multiple Choice", q: "29. Her sister is a _________ student at Tran Dai Nghia Specialized High School.", opts: ["interested", "unusual", "gifted", "unique"], ans: "gifted", tag: "Chị gái cô ấy là một học sinh năng khiếu/chuyên tại trường THPT Chuyên Trần Đại Nghĩa.", hint: "Học sinh học trường chuyên thường được gọi là học sinh trường năng khiếu, học sinh giỏi: 'gifted student'."},
+        {ex: "Exercise 3: Multiple Choice", q: "30. If you want to enter this school, you have to take its _________ examination.", opts: ["final", "exit", "entrance", "midterm"], ans: "entrance", tag: "Nếu bạn muốn vào trường này, bạn phải tham gia kỳ thi tuyển sinh của nó.", hint: "Kỳ thi dùng để xét tuyển đầu vào gọi là 'entrance examination'."},
+        {ex: "Exercise 3: Multiple Choice", q: "31. There are lots of snacks sold at my school’s _________.", opts: ["classroom", "garden", "computer room", "canteen"], ans: "canteen", tag: "Có rất nhiều đồ ăn nhẹ được bán tại căn-tin của trường tôi.", hint: "Nơi bán đồ ăn đồ uống nhẹ trong trường học cho học sinh là 'canteen' (căn-tin)."},
+        {ex: "Exercise 3: Multiple Choice", q: "32. They stayed _______ a mini hotel last summer.", opts: ["in", "on", "of", "for"], ans: "in", tag: "Họ đã lưu trú tại một khách sạn nhỏ vào mùa hè năm ngoái.", hint: "Giới từ chỉ vị trí bên trong một địa điểm tòa nhà: 'stay in a hotel'."},
+        {ex: "Exercise 3: Multiple Choice", q: "33. He always visits his old teachers _________ Teacher’s Day.", opts: ["at", "on", "in", "to"], ans: "on", tag: "Anh ấy luôn tới thăm các giáo viên cũ của mình vào ngày Nhà giáo.", hint: "Giới từ đi liền trước một ngày lễ cụ thể có chứa từ 'Day': dùng giới từ 'on'."},
+        {ex: "Exercise 3: Multiple Choice", q: "34. The class starts _________ 7:30 a.m.", opts: ["in", "at", "to", "on"], ans: "at", tag: "Lớp học bắt đầu chính xác vào lúc 7 giờ 30 phút sáng.", hint: "Giới từ đi liền trước một mốc thời gian giờ giấc cụ thể chính xác: dùng 'at'."},
+        {ex: "Exercise 3: Multiple Choice", q: "35. The children are playing __________ the garden.", opts: ["on", "between", "in", "to"], ans: "in", tag: "Lũ trẻ đang vui chơi ở trong khu vườn.", hint: "Không gian bao quanh có ranh giới rõ ràng như khu vườn dùng giới từ không gian 'in'."},
+        {ex: "Exercise 3: Multiple Choice", q: "36. There isn't anything __________ my pocket.", opts: ["next to", "between", "in", "near"], ans: "in", tag: "Không có bất cứ thứ gì ở bên trong túi quần của tôi cả.", hint: "Vị trí nằm lọt thỏm bên trong vật chứa (túi áo/túi quần) dùng giới từ 'in'."},
+        {ex: "Exercise 3: Multiple Choice", q: "37. We walk around the Old Quarter _______ night.", opts: ["to", "in", "at", "from"], ans: "at", tag: "Chúng tôi đi bộ dạo quanh khu Phố Cổ vào ban đêm.", hint: "Trạng từ chỉ thời gian ban đêm đi kèm giới từ cố định: 'at night'."},
+        {ex: "Exercise 3: Multiple Choice", q: "38. This is my friend. She is _________ Grade 7B.", opts: ["at", "in", "on", "to"], ans: "in", tag: "Đây là bạn của tôi. Cô ấy học lớp khối 7B.", hint: "Cấu trúc chỉ học sinh thuộc khối lớp nào: dùng giới từ 'in Grade + tên lớp'."},
+        {ex: "Exercise 3: Multiple Choice", q: "39. The meeting will be held _________ the school hall.", opts: ["at", "on", "in", "to"], ans: "in", tag: "Cuộc họp sẽ được tổ chức ở bên trong hội trường lớn của nhà trường.", hint: "Không gian bên trong một căn phòng lớn tòa nhà hội trường dùng giới từ vị trí 'in'."},
+        {ex: "Exercise 3: Multiple Choice", q: "40. I have photographs of my family __________ the wall of my office.", opts: ["at", "on", "next to", "in"], ans: "on", tag: "Tôi treo những bức ảnh gia đình của mình trên bức tường văn phòng làm việc.", hint: "Vị trí tiếp xúc trực tiếp trên bề mặt phẳng thẳng đứng như bức tường dùng giới từ 'on'."},
+        {ex: "Exercise 3: Multiple Choice", q: "41. The oranges are not in the basket. They are __________ the table.", opts: ["between", "on", "in", "next"], ans: "on", tag: "Những quả cam không nằm trong giỏ. Chúng ở trên mặt bàn.", hint: "Vị trí tiếp xúc bên trên bề mặt phẳng nằm ngang của cái bàn dùng giới từ 'on'."},
+        {ex: "Exercise 3: Multiple Choice", q: "42. I never go out _________ midnight.", opts: ["at", "on", "to", "in"], ans: "at", tag: "Tôi không bao giờ đi ra ngoài chơi vào lúc nửa đêm.", hint: "Mốc thời gian thời điểm chính xác cụ thể nửa đêm dùng giới từ cố định 'at midnight'."},
+        {ex: "Exercise 3: Multiple Choice", q: "43. Mr. Smith's jacket is __________ the closet.", opts: ["from", "at", "in", "under"], ans: "in", tag: "Áo khoác của ông Smith nằm ở bên trong tủ quần áo.", hint: "Bên trong một không gian khép kín như tủ đồ dùng giới từ chứa đựng 'in'."},
+        {ex: "Exercise 3: Multiple Choice", q: "44. Many people attend an Easter service _________ their local church.", opts: ["at", "in", "on", "with"], ans: "at", tag: "Nhiều người tham dự buổi lễ Phục sinh tại nhà thờ địa phương của họ.", hint: "Giới từ chỉ một địa điểm công cộng cụ thể diễn ra sự kiện hoạt động: 'at the church'."},
+        {ex: "Exercise 3: Multiple Choice", q: "45. There are two students __________ the class.", opts: ["front", "next", "in", "on"], ans: "in", tag: "Có hai học sinh đang ở trong lớp học.", hint: "Bên trong phạm vi phòng học dùng giới từ 'in the class'."},
+        {ex: "Exercise 3: Multiple Choice", q: "46. It often rains a lot _________ winter.", opts: ["in", "to", "at", "on"], ans: "in", tag: "Trời thường đổ mưa rất nhiều vào mùa đông.", hint: "Giới từ đứng trước các mùa trong năm (xuân, hạ, thu, đông): bắt buộc dùng 'in'."},
+        {ex: "Exercise 3: Multiple Choice", q: "47. We want to have a picnic _______________ the lake.", opts: ["in", "on", "at", "about"], ans: "at", tag: "Chúng tôi muốn tổ chức một buổi dã ngoại ở khu vực ven hồ.", hint: "Giới từ chỉ một vị trí địa điểm không gian công cộng cụ thể: 'at the lake' (ở hồ)."},
+        {ex: "Exercise 3: Multiple Choice", q: "48. It arrives __________ Chicago at ten o'clock.", opts: ["from", "at", "in", "near"], ans: "in", tag: "Nó đến thành phố Chicago vào lúc mười giờ.", hint: "Quy tắc động từ chuyển động: 'arrive in' đi với thành phố lớn hoặc quốc gia quốc tịch. 'Arrive at' đi với địa điểm nhỏ."},
+        {ex: "Exercise 3: Multiple Choice", q: "49. Please put your school bag _________ the desk.", opts: ["to", "in", "on", "at"], ans: "on", tag: "Vui lòng đặt cặp sách của bạn lên trên mặt bàn học.", hint: "Vị trí đặt trên bề mặt phẳng nằm ngang của bàn học dùng giới từ tiếp xúc 'on'."},
+        {ex: "Exercise 3: Multiple Choice", q: "50. She cycled to the beach _________ a summer afternoon.", opts: ["at", "on", "to", "in"], ans: "on", tag: "Cô ấy đạp xe ra bãi biển vào một buổi chiều mùa hè cụ thể.", hint: "Mặc dù 'afternoon' đi với 'in', nhưng khi có tính từ bổ nghĩa tạo thành một buổi cụ thể của một ngày: bắt buộc dùng giới từ 'on'."},
+        {ex: "Exercise 3: Multiple Choice", q: "51. Her birthday is _________ June.", opts: ["in", "to", "on", "at"], ans: "in", tag: "Sinh nhật của cô ấy là vào tháng Sáu.", hint: "Giới từ chỉ đứng trước các tháng trong năm (không có ngày đi kèm): luôn dùng giới từ 'in'."},
+
+        // Exercise 4
+        {ex: "Exercise 4: CLOSEST meaning", q: "52. The school was located in a peaceful and vibrant setting. (Từ đồng nghĩa với 'peaceful')", opts: ["impressive", "traditional", "tranquil", "interesting"], ans: "tranquil", tag: "Ngôi trường nằm trong một khung cảnh yên bình và đầy sống động.", hint: "Tính từ chỉ trạng thái yên tĩnh, thanh bình: 'peaceful' đồng nghĩa với từ 'tranquil'."},
+        {ex: "Exercise 4: CLOSEST meaning", q: "53. As I entered the school gates, I was welcomed by the cheerful sounds of students playing. (Từ đồng nghĩa với 'welcomed')", opts: ["enjoy", "reminded", "greeted", "fun"], ans: "greeted", tag: "Khi tôi bước vào cổng trường, tôi đã được chào đón bởi âm thanh vui tươi của học sinh đang vui chơi.", hint: "Động từ dạng bị động mang nghĩa được chào hỏi đón tiếp: 'welcomed' đồng nghĩa với từ 'greeted'."},
+        {ex: "Exercise 4: CLOSEST meaning", q: "54. I was greeted by the friendly receptionist at the school’s entrance. (Từ đồng nghĩa với 'greeted')", opts: ["forgeting", "to welcome", "welcome", "welcoming"], ans: "welcome", tag: "Tôi đã được chào đón bởi nhân viên lễ tân thân thiện tại lối vào của trường.", hint: "Xét theo từ loại gốc tương đồng ngữ cảnh trong phiếu học liệu trắc nghiệm, hành động chào đón 'greeted' sát nghĩa với động từ 'welcome'."},
+        {ex: "Exercise 4: CLOSEST meaning", q: "55. The teachers were seen actively participating in the students’ learning process. (Từ đồng nghĩa với 'actively')", opts: ["hard-working", "enthusiastically", "enthusiastical", "enthusiastic"], ans: "enthusiastically", tag: "Các giáo viên được thấy tham gia một cách tích cực vào quá trình học tập của học sinh.", hint: "Trạng từ bổ nghĩa chỉ mức độ sôi nổi, hăng hái tích cực: 'actively' đồng nghĩa với trạng từ 'enthusiastically' (nhiệt tình)."},
+        {ex: "Exercise 4: CLOSEST meaning", q: "56. Is that the most well-known school in our city? (Từ đồng nghĩa với 'well-known')", opts: ["normal", "intelligent", "widely know", "famous"], ans: "famous", tag: "Đó có phải là ngôi trường nổi tiếng nhất trong thành phố của chúng ta không?", hint: "Tính từ chỉ việc được nhiều người biết đến rộng rãi: 'well-known' đồng nghĩa hoàn toàn với 'famous' (nổi tiếng)."},
+
+        // Exercise 5
+        {ex: "Exercise 5: OPPOSITE meaning", q: "57. The classrooms in our school are equipped with modern facilities. (Từ trái nghĩa với 'modern')", opts: ["well-known", "up-to-date", "latest", "old"], ans: "old", tag: "Các phòng học trong trường của chúng tôi được trang bị các cơ sở vật chất hiện đại.", hint: "Tính từ chỉ sự tân tiến hiện đại 'modern' có từ trái nghĩa trực tiếp gốc là 'old' (cũ kỹ, lạc hậu)."},
+        {ex: "Exercise 5: OPPOSITE meaning", q: "58. Students should be hard-working. (Từ trái nghĩa với 'hard-working')", opts: ["intelligent", "strong", "active", "lazy"], ans: "lazy", tag: "Học sinh thì cần phải chăm chỉ chịu khó học tập.", hint: "Tính từ chỉ đức tính chăm chỉ làm việc 'hard-working' đối lập hoàn toàn với tính từ 'lazy' (lười biếng)."},
+        {ex: "Exercise 5: OPPOSITE meaning", q: "59. Quoc Hoc - Hue was a school for children from rich and royal families. (Từ trái nghĩa với 'rich')", opts: ["prosperous", "abundant", "poor", "gifted"], ans: "poor", tag: "Quốc Học - Huế từng là ngôi trường dành cho con em từ các gia đình giàu có và hoàng tộc.", hint: "Tính từ chỉ tầng lớp giàu có nhiều tiền bạc 'rich' có từ trái nghĩa cơ bản là 'poor' (nghèo khổ)."},
+        {ex: "Exercise 5: OPPOSITE meaning", q: "60. The school had a cafeteria offering nutritious meals to the students. (Từ trái nghĩa với 'offering')", opts: ["withholding", "consisting", "sharing", "opening"], ans: "withholding", tag: "Ngôi trường có một nhà ăn cung cấp các bữa ăn giàu dinh dưỡng cho học sinh.", hint: "Hành động cung cấp, ban tặng 'offering' trái nghĩa với hành động 'withholding' (giữ lại, từ chối cung cấp)."},
+        {ex: "Exercise 5: OPPOSITE meaning", q: "61. The visit allowed me to witness the strong sense of community among the students and teachers. (Từ trái nghĩa với 'allowed')", opts: ["shared", "prevented", "good", "agreed"], ans: "prevented", tag: "Chuyến tham quan đã cho phép tôi chứng kiến tinh thần cộng đồng mạnh mẽ giữa học sinh và giáo viên.", hint: "Động từ cho phép tạo điều kiện 'allowed' có từ trái nghĩa là 'prevented' (ngăn cản, cản trở)."},
+
+        // Exercise 6
+        {ex: "Exercise 6: Prepositions of time", q: "62. We always go on holiday ____ summer.", opts: ["in", "at", "on", "for"], ans: "in", tag: "Chúng tôi luôn đi nghỉ mát vào mùa hè.", hint: "Đứng trước các mùa trong năm bắt buộc sử dụng giới từ thời gian 'in'."},
+        {ex: "Exercise 6: Prepositions of time", q: "63. My mother usually goes shopping ______ Friday morning.", opts: ["in", "at", "on", "to"], ans: "on", tag: "Mẹ tôi thường đi mua sắm vào sáng thứ Sáu.", hint: "Khi có buổi đi kèm một ngày cụ thể trong tuần (Friday morning), ta dùng giới từ 'on'."},
+        {ex: "Exercise 6: Prepositions of time", q: "64. I always do my homework ______ the evening.", opts: ["in", "at", "on", "from"], ans: "in", tag: "Tôi luôn luôn làm bài tập về nhà của mình vào buổi tối.", hint: "Cụm danh từ chỉ các buổi lớn trong ngày đi với giới từ cố định: 'in the evening'."},
+        {ex: "Exercise 6: Prepositions of time", q: "65. The circus usually comes to our town _____ spring.", opts: ["in", "at", "on", "by"], ans: "in", tag: "Gánh xiếc thường đến thị trấn của chúng tôi vào mùa xuân.", hint: "Mùa trong năm (spring) đi kèm giới từ thời gian 'in'."},
+        {ex: "Exercise 6: Prepositions of time", q: "66. Sophia's birthday is ______ May 16th.", opts: ["in", "at", "on", "to"], ans: "on", tag: "Sinh nhật của Sophia là vào ngày 16 tháng 5.", hint: "Mốc thời gian có chứa ngày cụ thể trong tháng bắt buộc dùng giới từ 'on'."},
+        {ex: "Exercise 6: Prepositions of time", q: "67. I usually get up ______ seven o'clock.", opts: ["in", "at", "on", "with"], ans: "at", tag: "Tôi thường thức dậy vào lúc đúng 7 giờ.", hint: "Đứng trước mốc giờ giấc cụ thể chính xác dùng giới từ thời gian 'at'."},
+        {ex: "Exercise 6: Prepositions of time", q: "68. My favourite television programme begins _____ 6:30 _____ the evening.", opts: ["at / in", "in / at", "on / in", "at / on"], ans: "at / in", tag: "Chương trình truyền hình yêu thích của tôi bắt đầu lúc 6:30 vào buổi tối.", hint: "Vế đầu là giờ cụ thể đi với 'at', vế sau là buổi trong ngày đi với 'in'."},
+        {ex: "Exercise 6: Prepositions of time", q: "69. Sometimes it snows ______ winter.", opts: ["in", "at", "on", "for"], ans: "in", tag: "Thỉnh thoảng trời đổ tuyết rơi vào mùa đông.", hint: "Mùa đông (winter) là mùa trong năm nên đi kèm giới từ thời gian 'in'."},
+        {ex: "Exercise 6: Prepositions of time", q: "70. My friend's birthday is _____ June.", opts: ["in", "at", "on", "to"], ans: "in", tag: "Sinh nhật bạn của tôi là vào tháng Sáu.", hint: "Đứng trước các tháng độc lập trong năm không có ngày đi kèm: dùng giới từ 'in'."},
+        {ex: "Exercise 6: Prepositions of time", q: "71. Some birds and animals come out _____ night.", opts: ["in", "at", "on", "by"], ans: "at", tag: "Một số loài chim và động vật thường đi kiếm ăn vào ban đêm.", hint: "Cụm từ chỉ thời gian ban đêm cố định ngữ pháp: 'at night'."},
+
+        // Exercise 7
+        {ex: "Exercise 7: Circle the correct option", q: "72. She is doing yoga ______ the club.", opts: ["on", "at", "in", "to"], ans: "at", tag: "Cô ấy đang tập yoga tại câu lạc bộ.", hint: "Chỉ vị trí địa điểm cụ thể diễn ra một hoạt động sinh hoạt: 'at the club'."},
+        {ex: "Exercise 7: Circle the correct option", q: "73. The math finished ______ 3 o’clock.", opts: ["at", "on", "in", "to"], ans: "at", tag: "Tiết học toán đã kết thúc vào lúc đúng 3 giờ.", hint: "Chỉ thời gian giờ giấc chính xác dùng giới từ 'at'."},
+        {ex: "Exercise 7: Circle the correct option", q: "74. Her brother learned English ______ the USA.", opts: ["in", "at", "on", "to"], ans: "in", tag: "Anh trai cô ấy đã học tiếng Anh ở nước Mỹ.", hint: "Đứng trước tên của một quốc gia hoặc vùng lãnh thổ lớn, dùng giới từ không gian 'in'."},
+        {ex: "Exercise 7: Circle the correct option", q: "75. He is watching a movie with his girlfriend ______ the moment.", opts: ["at", "in", "on", "for"], ans: "at", tag: "Anh ấy đang xem phim cùng bạn gái vào thời điểm này.", hint: "Cụm từ cố định mang nghĩa ngay tại thời điểm hiện tại: 'at the moment'."},
+        {ex: "Exercise 7: Circle the correct option", q: "76. My clothes aren’t ______ the sofa. Where are they?", opts: ["in", "on", "at", "under"], ans: "on", tag: "Quần áo của tôi không nằm trên ghế sofa. Chúng ở đâu thế?", hint: "Vị trí nằm trên bề mặt tiếp xúc của đồ vật cái ghế sofa dùng giới từ 'on'."},
+        {ex: "Exercise 7: Circle the correct option", q: "77. What happened ______ your school yesterday morning?", opts: ["at", "on", "in", "to"], ans: "at", tag: "Chuyện gì đã xảy ra tại trường học của bạn vào sáng hôm qua thế?", hint: "Xem trường học như một địa điểm công cộng cụ thể xảy ra sự việc dùng giới từ vị trí 'at'."},
+        {ex: "Exercise 7: Circle the correct option", q: "78. We will have a big party ______ our wedding day.", opts: ["on", "in", "at", "for"], ans: "on", tag: "Chúng tôi sẽ tổ chức một bữa tiệc lớn vào ngày đám cưới của mình.", hint: "Ngày lễ cụ thể có chứa từ 'day' đứng cuối bắt buộc đi kèm giới từ 'on'."},
+        {ex: "Exercise 7: Circle the correct option", q: "79. He was born ______ the spring of 2012.", opts: ["in", "at", "on", "to"], ans: "in", tag: "Cậu ấy được sinh ra vào mùa xuân năm 2012.", hint: "Giới từ chỉ các mùa trong năm luôn tuân thủ luật dùng giới từ 'in'."},
+        {ex: "Exercise 7: Circle the correct option", q: "80. We don’t have maths ______ Tuesdays and Fridays.", opts: ["on", "in", "at", "for"], ans: "on", tag: "Chúng tôi không có tiết toán vào các ngày thứ Ba và thứ Sáu.", hint: "Đứng trước các ngày trong tuần ở dạng số nhiều hay số ít luôn dùng giới từ 'on'."},
+        {ex: "Exercise 7: Circle the correct option", q: "81. His graduation party is held ______ a restaurant ______ District 1.", opts: ["on / in", "at / in", "at / on", "in / at"], ans: "at / in", tag: "Tiệc tốt nghiệp của anh ấy được tổ chức tại một nhà hàng ở Quận 1.", hint: "Vế đầu là địa điểm cụ thể dùng 'at', vế sau là đơn vị hành chính quận huyện vùng miền dùng 'in'."},
+
+        // Exercise 8
+        {ex: "Exercise 8: Word Form", q: "82. Chu Van An was one of the most brilliant and famous _________ in Viet Nam's history. (scholar)", opts: ["scholars", "scholarly", "scholarship", "scholar"], ans: "scholars", tag: "Chu Văn An là một trong những nhà học giả lỗi lạc và nổi tiếng nhất trong lịch sử Việt Nam.", hint: "Cấu trúc 'one of the most + adj + N số nhiều' đòi hỏi phải dùng danh từ số nhiều thêm s: 'scholars'."},
+        {ex: "Exercise 8: Word Form", q: "83. The school is quite normal, but its _________ are really beautiful. (surround)", opts: ["surroundings", "surrounded", "surrounding", "surrounds"], ans: "surroundings", tag: "Ngôi trường khá bình thường, nhưng không gian môi trường xung quanh nó thực sự rất đẹp.", hint: "Tính từ sở hữu 'its' cần một danh từ đứng sau. Từ 'surroundings' mang nghĩa là vùng không gian môi trường cảnh quan xung quanh vật thể."},
+        {ex: "Exercise 8: Word Form", q: "84. The students were carefully _________ for the final exam. (prepare)", opts: ["prepared", "preparation", "preparing", "prepares"], ans: "prepared", tag: "Các học sinh đã được chuẩn bị một cách cẩn thận cho kỳ thi cuối kỳ.", hint: "Cấu trúc bị động thì quá khứ đơn: 'were + V-ed/P2'. Do đó dùng từ 'prepared'."},
+        {ex: "Exercise 8: Word Form", q: "85. He completed his exams _________ and won a scholarship to study abroad. (succeed)", opts: ["successfully", "successful", "success", "succeeded"], ans: "successfully", tag: "Cậu ấy đã hoàn thành các kỳ thi của mình một cách thành công và giành được học bổng du học.", hint: "Cần một trạng từ đứng sau để bổ nghĩa cho hành động động từ thường 'completed': 'successfully'."},
+        {ex: "Exercise 8: Word Form", q: "86. The _________ 's pictures are very beautiful. They are shown in a national exhibition. (paint)", opts: ["painter", "painting", "paint", "paints"], ans: "painter", tag: "Những bức tranh của người họa sĩ rất đẹp. Chúng được trưng bày trong triển lãm quốc gia.", hint: "Sở hữu cách yêu cầu một danh từ chỉ người tạo ra bức tranh đứng trước: 'painter' (họa sĩ)."},
+        {ex: "Exercise 8: Word Form", q: "87. He is _________ about his sister's performance because she was sick yesterday. (anxiety)", opts: ["anxious", "anxiously", "anxieties", "anxiety"], ans: "anxious", tag: "Anh ấy lo lắng về màn biểu diễn của em gái mình vì hôm qua cô ấy bị ốm.", hint: "Sau động từ nối liên kết tobe 'is' cần một tính từ miêu tả trạng thái cảm xúc: 'anxious' (lo lắng)."},
+        {ex: "Exercise 8: Word Form", q: "88. She is cooking the food _________. It's interesting to see it. (special)", opts: ["specially", "special", "specialty", "specialize"], ans: "specially", tag: "Cô ấy đang nấu món ăn này một cách đặc biệt. Thật thú vị khi xem việc đó.", hint: "Cần trạng từ 'specially' đứng ở cuối câu để bổ nghĩa trực tiếp cho động từ hành động 'is cooking'."},
+        {ex: "Exercise 8: Word Form", q: "89. He took an _________ last week. His result was very good. (exam)", opts: ["examination", "examine", "examiner", "examined"], ans: "examination", tag: "Anh ấy đã tham gia một kỳ thi vào tuần trước. Kết quả của anh ấy rất tốt.", hint: "Sau mạo từ 'an' bắt đầu bằng nguyên âm cần một danh từ hoàn chỉnh: 'examination' (kỳ thi)."},
+        {ex: "Exercise 8: Word Form", q: "90. He received _________ as a good teacher after working hard for a long time. (recognize)", opts: ["recognition", "recognizable", "recognized", "recognizing"], ans: "recognition", tag: "Ông đã nhận được sự công nhận là một giáo viên giỏi sau khi làm việc chăm chỉ trong một thời gian dài.", hint: "Động từ 'received' đòi hỏi một danh từ đóng vai trò tân ngữ đứng sau nó: 'recognition' (sự công nhận)."},
+        {ex: "Exercise 8: Word Form", q: "91. Thong Nhat Palace is a _________ attraction in Ho Chi Minh city. (tour)", opts: ["tourist", "tourism", "tour", "touristic"], ans: "tourist", tag: "Dinh Thống Nhất là một địa điểm thu hút khách du lịch ở thành phố Hồ Chí Minh.", hint: "Cụm danh từ ghép cố định chỉ địa điểm danh lam thắng cảnh hút khách: 'tourist attraction'."},
+        {ex: "Exercise 8: Word Form", q: "92. The Temple of Literature is a famous _________ and historical site in Ha Noi. (culture)", opts: ["cultural", "culture", "culturally", "cultures"], ans: "cultural", tag: "Văn Miếu - Quốc Tử Giám là một di tích lịch sử và văn hóa nổi tiếng ở Hà Nội.", hint: "Cấu trúc tính từ song hành qua liên từ 'and': historical (tính từ) nên vị trí trống cũng phải điền tính từ 'cultural'."},
+        {ex: "Exercise 8: Word Form", q: "93. We need to improve the quality of _________ in remote areas. (educate)", opts: ["education", "educational", "educator", "educated"], ans: "education", tag: "Chúng ta cần cải thiện chất lượng giáo dục ở các vùng sâu vùng xa.", hint: "Sau giới từ 'of' cần điền một danh từ làm rõ nghĩa khái niệm: 'quality of education' (chất lượng giáo dục)."},
+        {ex: "Exercise 8: Word Form", q: "94. Many _________ come to visit the Imperial Academy every year. (visit)", opts: ["visitors", "visits", "visiting", "visitor"], ans: "visitors", tag: "Nhiều du khách đến tham quan Quốc Tử Giám mỗi năm.", hint: "Đại từ chỉ lượng số nhiều 'Many' bắt buộc đi với danh từ số nhiều đếm được chỉ người hành động: 'visitors'."},
+        {ex: "Exercise 8: Word Form", q: "95. Students do many _________ experiments in the laboratory. (science)", opts: ["scientific", "science", "scientifically", "sciences"], ans: "scientific", tag: "Học sinh thực hiện nhiều thí nghiệm khoa học trong phòng thí nghiệm.", hint: "Đứng trước danh từ số nhiều 'experiments' cần điền một tính từ bổ nghĩa tính chất: 'scientific' (thuộc về khoa học)."}
+    ];
+
+    function xaoTron(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    const quizCompiledData = questionsRawData.map((item, index) => {
+        let optionsShuffled = [...item.opts];
+        xaoTron(optionsShuffled);
+
+        let step1 = `<strong>Bước 1: Dịch nghĩa câu hỏi gốc:</strong><br><em>"${item.q}"</em><br>➔ Ý nghĩa câu trọn vẹn: <strong>${item.tag}</strong>`;
+        let step2 = `<br><strong>Bước 2: Phân tích hiển thị nghĩa của các lựa chọn:</strong><br>`;
+        optionsShuffled.forEach((opt, idx) => {
+            let letter = String.fromCharCode(65 + idx);
+            let status = opt === item.ans ? " (Đáp án chính xác)" : " (Phương án bẫy gây nhiễu)";
+            step2 += `- Lựa chọn ${letter}. <strong>${opt}</strong>${status}<br>`;
+        });
+        let step3 = `<br><strong>Bước 3: Tại sao đáp án này là đúng?</strong><br>Lựa chọn từ cụm từ <strong>"${item.ans}"</strong> hoàn toàn chính xác do thỏa mãn trực tiếp lý thuyết chuyên đề: ${item.hint}`;
+        let step4 = `<br><strong>Bước 4: Tại sao 3 đáp án còn lại SAI?</strong><br>Các phương án nhiễu còn lại bị loại bỏ lập tức do vi phạm quy tắc chia từ loại (danh/tính/trạng từ), dùng sai hệ thống giới từ thời gian/nơi chốn, hoặc tạo ra ngữ nghĩa lộn xộn không ăn khớp dữ liệu gốc.`;
+
+        return {
+            id: index + 1,
+            exerciseName: item.ex,
+            questionText: item.q,
+            options: optionsShuffled,
+            correctIndex: optionsShuffled.indexOf(item.ans),
+            explanationHTML: `${step1}<br>${step2}${step3}<br>${step4}`
+        };
+    });
+
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    function playSoundFeedback(status) {
+        if (audioContext.state === 'suspended') audioContext.resume();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        if (status === 'correct') {
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+            oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.08);
+            gainNode.gain.setValueAtTime(0.25, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.35);
+            oscillator.start(); oscillator.stop(audioContext.currentTime + 0.35);
+            confetti({ particleCount: 50, spread: 45, origin: { y: 0.85 } });
+        } else {
+            oscillator.type = 'triangle';
+            oscillator.frequency.setValueAtTime(140, audioContext.currentTime);
+            oscillator.frequency.linearRampToValueAtTime(70, audioContext.currentTime + 0.35);
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.35);
+            oscillator.start(); oscillator.stop(audioContext.currentTime + 0.35);
+        }
+    }
+
+    let currentScore = 0;
+    const answeredTracker = new Set();
+
+    function displayQuiz() {
+        const zone = document.getElementById('quiz-load-zone');
+        let activeExercise = "";
+
+        quizCompiledData.forEach((q, index) => {
+            if (q.exerciseName !== activeExercise) {
+                activeExercise = q.exerciseName;
+                const titleBlock = document.createElement('div');
+                titleBlock.className = 'exercise-header';
+                titleBlock.innerText = activeExercise;
+                zone.appendChild(titleBlock);
+            }
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            const optionLetters = ['A', 'B', 'C', 'D'];
+
+            card.innerHTML = `
+                <div class="question-text">Câu ${index + 1}: ${q.questionText}</div>
+                <div class="options-layout" id="box-${q.id}">
+                    ${q.options.map((opt, i) => `
+                        <button class="btn-opt" onclick="clickVerifyAnswer(${q.id}, ${i}, this)">${optionLetters[i]}. ${opt}</button>
+                    `).join('')}
+                </div>
+                <div class="explanation-panel" id="panel-${q.id}">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">🌿 HỆ THỐNG GIẢI THÍCH 4 BƯỚC:</strong><br><br>${q.explanationHTML}
+                </div>
+            `;
+            zone.appendChild(card);
+        });
+    }
+
+    window.clickVerifyAnswer = function(qId, selectedIdx, btn) {
+        if (answeredTracker.has(qId)) return;
+        answeredTracker.add(qId);
+
+        const q = quizCompiledData.find(item => item.id === qId);
+        const box = document.getElementById(`box-${qId}`);
+        const buttons = box.getElementsByTagName('button');
+        const panel = document.getElementById('panel-' + qId);
+
+        if (selectedIdx === q.correctIndex) {
+            btn.classList.add('correct');
+            playSoundFeedback('correct');
+            currentScore++;
+        } else {
+            btn.classList.add('wrong');
+            buttons[q.correctIndex].classList.add('correct');
+            playSoundFeedback('wrong');
+        }
+
+        panel.style.display = 'block';
+    }
+
+    window.nopBaiVaChamDiem = function() {
+        const overlay = document.getElementById('result-overlay');
+        const scoreDisplay = document.getElementById('txt-diem');
+        const commentDisplay = document.getElementById('txt-nhan-xet');
+        const performancePercentage = (currentScore / quizCompiledData.length) * 100;
+
+        scoreDisplay.innerText = `Điểm số của con: ${currentScore} / ${quizCompiledData.length} câu đúng`;
+
+        if (performancePercentage < 50) {
+            commentDisplay.innerText = "Ms Lê Hằng nhắn nhủ: “Điểm lần này chưa cao lắm, con cố gắng đọc kỹ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!”";
+        } else if (performancePercentage <= 85) {
+            commentDisplay.innerText = "Ms Lê Hằng nhắn nhủ: “Con đã có tiến bộ khá ổn rồi, con cố gắng đọc kỹ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!”";
+        } else {
+            commentDisplay.innerText = "Ms Lê Hằng nhắn nhủ: “Làm tốt lắm, con cố gắng rinh điểm 10 ở lần sau nha!”";
+            confetti({ particleCount: 200, spread: 100, origin: { y: 0.4 } });
+        }
+
+        overlay.style.display = 'flex';
+    }
+
+    displayQuiz();
+</script>
+</body>
+</html>
